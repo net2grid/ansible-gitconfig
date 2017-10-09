@@ -32,3 +32,8 @@ License
 -------
 
 MIT
+
+Author Information
+------------------
+
+NET2GRID
