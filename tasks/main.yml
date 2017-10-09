@@ -1,12 +1,13 @@
 ---
 - name: Verify presence of local .gitconfig
   local_action: stat path="{{ gitconfig_local_path }}"
+  become: false
   register: stat_gitconfig
 
 - name: Make sure remote Vagrant user home dir exists
   stat: "path={{ gitconfig_remote_path }}"
   register: stat_vagrant_home
 
-- name: copy local .gitconfig into box
+- name: Copy local .gitconfig to Vagrant box
   copy: "src={{ gitconfig_local_path }} dest={{ gitconfig_remote_path }}/.gitconfig mode={{ gitconfig_filemode }}"
   when: stat_gitconfig.stat.exists and stat_vagrant_home.stat.exists
